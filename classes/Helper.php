@@ -23,29 +23,28 @@ class Helper
     public function errorToBrowserConsole($msg)
     {
         $msg = str_replace('"', "''", $msg);  # weak attempt to make sure there's not JS breakage
-        echo "<script>console.error( \"PHP ERROR: $msg\" );</script>";
+        $this->executeJsFunction('console.error', rand(1,999) , 'PHP ERROR: ' . $msg);
     }
     public function warnToBrowserConsole($msg)
     {
         $msg = str_replace('"', "''", $msg);  # weak attempt to make sure there's not JS breakage
-        echo "<script>console.warn( \"PHP WARNING: $msg\" );</script>";
+        $this->executeJsFunction('console.warn', rand(1,999) , 'PHP WARNING: ' . $msg);
     }
     public function logToBrowserConsole($msg)
     {
         $msg = str_replace('"', "''", $msg);  # weak attempt to make sure there's not JS breakage
-        echo "<script>console.log( \"PHP LOG: $msg\" );</script>";
+        $this->executeJsFunction('console.log', rand(1,999) , 'PHP LOG: ' . $msg);
     }
 
-    public function executeJsFunction($fun, $params = null)
+    public function executeJsFunction($fun, $funId, $params = null)
     {
         if (is_null($params)) {
-            echo '<script type="text/javascript">',
-                $fun . '();',
+            echo '<script id="'. $funId .'" type="text/javascript">',
+                'handleFunction(' .$fun . ', '. $funId .');',
                 '</script>';
         } else {
-            echo '<script type="text/javascript">',
-                'let params = ' .  json_encode($params) . ';',
-                $fun . '(params);',
+            echo '<script id="'. $funId .'" type="text/javascript">',
+                'handleFunction(' . $fun . ', '. json_encode($params) .', ' . $funId . ');',
                 '</script>';
         }
     }

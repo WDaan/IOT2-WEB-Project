@@ -65,6 +65,7 @@
         This page was made by Daan Wijns
     </footer>
     <script src="js/table.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
@@ -78,7 +79,7 @@ $helper = Helper::getInstance();
 // $data = $mysqli->getAll();
 $data = $mysqli->getLast(4);
 
-$helper->executeJsFunction("drawTable", $data);
+$helper->executeJsFunction("drawTable", rand(1,999) ,$data);
 
 
 ?>

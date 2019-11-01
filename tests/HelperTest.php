@@ -15,21 +15,24 @@ class HelperTest extends TestCase
     public function testExecuteJsFunctionNoParams()
     {
         $helper = Helper::getInstance();
-        $this->expectOutputString('<script type="text/javascript">test();</script>');
-        $helper->executeJsFunction('test');
+        $funId = rand(1,999);
+        $this->expectOutputString('<script id="'. $funId .'" type="text/javascript">handleFunction(test, '. $funId .');</script>');
+        $helper->executeJsFunction('test',  $funId);
     }
 
     public function testExecuteJsFunctionWithSimpleParam()
     {
         $helper = Helper::getInstance();
-        $this->expectOutputString('<script type="text/javascript">let params = "test";test(params);</script>');
-        $helper->executeJsFunction('test', 'test');
+        $funId = rand(1,999);
+        $this->expectOutputString('<script id="'. $funId .'" type="text/javascript">handleFunction(test, "test", '.  $funId .');</script>');
+        $helper->executeJsFunction('test', $funId, 'test');
     }
 
     public function testExecuteJsFunctionWithJSONParam()
     {
         $helper = Helper::getInstance();
-        $this->expectOutputString('<script type="text/javascript">let params = {"name":"daan","id":5};test(params);</script>');
-        $helper->executeJsFunction('test', ["name" => "daan", "id" => 5]);
+        $funId = rand(1,999);
+        $this->expectOutputString('<script id="'. $funId .'" type="text/javascript">handleFunction(test, {"name":"daan","id":5}, '.  $funId .');</script>');
+        $helper->executeJsFunction('test',  $funId, ["name" => "daan", "id" => 5]);
     }
 }
