@@ -1,11 +1,10 @@
 <?php
-include_once('php/Helper.php');
-require('vendor/autoload.php');
+declare(strict_types=1);
 
 $dotenv = Dotenv\Dotenv::create(__DIR__, '../.env');
 $dotenv->load();
 
-class DatabaseHandler
+final class DatabaseHandler
 {
     private static $instance = null;
     private $conn;
@@ -42,11 +41,26 @@ class DatabaseHandler
     public function getAll()
     {
         $query = "SELECT * FROM `data`";
+        return $this->executeQuery($query);
+    }
+
+    public function getFirst($num = 5)
+    {
+        $query = "SELECT * FROM `data` LIMIT " . $num;
+        return $this->executeQuery($query);
+    }
+    public function getLast($num = 5)
+    {
+        $query = "SELECT * FROM (SELECT * FROM `data` ORDER BY id DESC LIMIT " . $num . " )Var1 ORDER BY id ASC";
+        return $this->executeQuery($query);
+    }
+
+    private function executeQuery($query)
+    {
         if ($result = $this->conn->query($query)) {
             /* fetch associative array */
             $data = [];
             while ($row = $result->fetch_assoc()) {
-                // echo $row["NAME"] . " " . $row["VALUE"] . " " . $row["id"] . "<br />";
                 $data[] =  ['id' =>  $row['ID'], 'time' => $row["TIME"], 'temp' => $row['TEMP'], 'speed' => $row['SPEED']];
             }
             /* free result set */

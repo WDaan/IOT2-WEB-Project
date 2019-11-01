@@ -1,5 +1,11 @@
 {
-    "require": {
-        "vlucas/phpdotenv": "^3.6"
-    }
+  "require": {
+    "vlucas/phpdotenv": "^3.6",
+    "phpunit/phpunit": "^8.4"
+  },
+  "autoload": {
+    "classmap": [
+      "classes/"
+    ]
+  }
 }

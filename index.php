@@ -70,14 +70,13 @@
 </html>
 
 <?php
-
-include 'php/DatabaseHandler.php';
-include_once('php/Helper.php');
+require('vendor/autoload.php');
 
 $mysqli = DatabaseHandler::getInstance();
 $helper = Helper::getInstance();
 
-$data = $mysqli->getAll();
+// $data = $mysqli->getAll();
+$data = $mysqli->getLast(4);
 
 $helper->executeJsFunction("drawTable", $data);
 
