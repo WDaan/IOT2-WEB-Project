@@ -24,6 +24,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt update 
+      - run: sudo apt-get install php7.3
 
       # Download and cache dependencies
       - restore_cache:
