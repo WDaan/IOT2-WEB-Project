@@ -4,4 +4,4 @@
 
 ## tests
 - 'tests' folder is for phpunit tests
-- '__tests__' folder is for jest unit tests
+- '__ tests __' folder is for jest unit tests

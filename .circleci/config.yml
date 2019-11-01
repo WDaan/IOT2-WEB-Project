@@ -39,7 +39,7 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
-      - run: ./vendor/bin/phpunit
+      - run: ./vendor/bin/phpunit --filter=HelperTest
 
 workflows:
   version: 2
