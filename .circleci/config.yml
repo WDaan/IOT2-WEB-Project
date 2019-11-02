@@ -6,8 +6,6 @@ jobs:
 
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - restore-cache:
           keys:
             - dependency-cache-{{ checksum "package-lock.json" }}
@@ -28,8 +26,6 @@ jobs:
       - image: circleci/php:7.3-node-browsers
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run: sudo apt update
 
       # Download and cache dependencies
