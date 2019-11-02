@@ -1,0 +1,22 @@
+{
+  "name": "iot2-node-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "lint": "eslint --fix ."
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "cors": "^2.8.5"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
