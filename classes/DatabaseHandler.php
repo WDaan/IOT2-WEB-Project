@@ -20,7 +20,7 @@ final class DatabaseHandler
         if ($this->conn->connect_errno) {
             $this->helper->errorToBrowserConsole("Failed to connect to MySQL: " . $this->conn->connect_error);
         } else {
-            $this->helper->logToBrowserConsole("connection success!!");
+            $this->helper->logToBrowserConsole("mysqli connection success!");
         }
     }
 

@@ -15,24 +15,34 @@ class HelperTest extends TestCase
     public function testExecuteJsFunctionNoParams()
     {
         $helper = Helper::getInstance();
-        $funId = rand(1,999);
-        $this->expectOutputString('<script id="'. $funId .'" type="text/javascript">handleFunction(test, '. $funId .');</script>');
-        $helper->executeJsFunction('test',  $funId);
+        $this->expectOutputRegex('/(handleFunction\(test)/');
+        $helper->executeJsFunction('test');
     }
 
     public function testExecuteJsFunctionWithSimpleParam()
     {
         $helper = Helper::getInstance();
-        $funId = rand(1,999);
-        $this->expectOutputString('<script id="'. $funId .'" type="text/javascript">handleFunction(test, "test", '.  $funId .');</script>');
-        $helper->executeJsFunction('test', $funId, 'test');
+        $this->expectOutputRegex('/(handleFunction\(test, "test")/');
+        $helper->executeJsFunction('test', 'test');
+    }
+    public function testExecuteJsFunctionWithSimpleParamWrong()
+    {
+        $helper = Helper::getInstance();
+        $this->expectOutputRegex('/^((?!hallo).)*$/');
+        $helper->executeJsFunction('test', 'testString');
     }
 
     public function testExecuteJsFunctionWithJSONParam()
     {
         $helper = Helper::getInstance();
-        $funId = rand(1,999);
-        $this->expectOutputString('<script id="'. $funId .'" type="text/javascript">handleFunction(test, {"name":"daan","id":5}, '.  $funId .');</script>');
-        $helper->executeJsFunction('test',  $funId, ["name" => "daan", "id" => 5]);
+        $this->expectOutputRegex('/(handleFunction\(test), {"name":"daan","id":5}/');
+        $helper->executeJsFunction('test', ["name" => "daan", "id" => 5]);
+    }
+
+    public function testExecuteJsFunctionWithJSONParamWrong()
+    {
+        $helper = Helper::getInstance();
+        $this->expectOutputRegex('/^((?!"id":5).)*$/');
+        $helper->executeJsFunction('test', ["name" => "daan", "id" => 4]);
     }
 }

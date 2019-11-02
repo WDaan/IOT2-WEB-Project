@@ -23,28 +23,30 @@ class Helper
     public function errorToBrowserConsole($msg)
     {
         $msg = str_replace('"', "''", $msg);  # weak attempt to make sure there's not JS breakage
-        $this->executeJsFunction('console.error', rand(1,999) , 'PHP ERROR: ' . $msg);
+        $this->executeJsFunction('console.error', 'PHP ERROR: ' . $msg);
     }
     public function warnToBrowserConsole($msg)
     {
         $msg = str_replace('"', "''", $msg);  # weak attempt to make sure there's not JS breakage
-        $this->executeJsFunction('console.warn', rand(1,999) , 'PHP WARNING: ' . $msg);
+        $this->executeJsFunction('console.warn', 'PHP WARNING: ' . $msg);
     }
     public function logToBrowserConsole($msg)
     {
         $msg = str_replace('"', "''", $msg);  # weak attempt to make sure there's not JS breakage
-        $this->executeJsFunction('console.log', rand(1,999) , 'PHP LOG: ' . $msg);
+        $this->executeJsFunction('console.log', 'PHP LOG: ' . $msg);
     }
 
-    public function executeJsFunction($fun, $funId, $params = null)
+
+    public function executeJsFunction($fun, $params = null)
     {
+        $funId = rand(1, 999);
         if (is_null($params)) {
-            echo '<script id="'. $funId .'" type="text/javascript">',
-                'handleFunction(' .$fun . ', '. $funId .');',
+            echo '<script id="' . $funId . '" type="text/javascript">',
+                'handleFunction(' . $fun . ', ' . $funId . ');',
                 '</script>';
         } else {
-            echo '<script id="'. $funId .'" type="text/javascript">',
-                'handleFunction(' . $fun . ', '. json_encode($params) .', ' . $funId . ');',
+            echo '<script id="' . $funId . '" type="text/javascript">',
+                'handleFunction(' . $fun . ', ' . json_encode($params) . ', ' . $funId . ');',
                 '</script>';
         }
     }

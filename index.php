@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="css/main.css" />
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <title>Project IOT</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+    <script src="/js/main.js"></script>
+    <script src="js/MQTT.js"></script>
 </head>
 
 <body>
@@ -44,6 +47,23 @@
                     </h1>
                 </div>
             </section>
+            <section>
+                <div class="columns">
+                    <div class="column is-two-thirds">
+                        <input type="text" id="tbxMessage" class="form-control input" placeholder="message to send..." />
+                    </div>
+                    <div class="column">
+                        <button id="btnSendMessage" class="button is-primary">
+                            Send message
+                        </button>
+                    </div>
+            </section>
+            <section>
+                <div class="mt-4 container">
+                    <h3>Subscription</h3>
+                    <div id="divSubscription"></div>
+                </div>
+            </section>
             <!--datatable-->
             <section>
                 <table class="table is-fullwidth is-striped" style="margin-top:50px;">
@@ -64,8 +84,6 @@
     <footer style="text-align: center">
         This page was made by Daan Wijns
     </footer>
-    <script src="js/table.js"></script>
-    <script src="js/main.js"></script>
 </body>
 
 </html>
@@ -76,10 +94,10 @@ require('vendor/autoload.php');
 $mysqli = DatabaseHandler::getInstance();
 $helper = Helper::getInstance();
 
-// $data = $mysqli->getAll();
-$data = $mysqli->getLast(4);
+$data = $mysqli->getAll();
+$data = $mysqli->getLast(10);
 
-$helper->executeJsFunction("drawTable", rand(1,999) ,$data);
+$helper->executeJsFunction("drawTable", $data);
 
 
 ?>
