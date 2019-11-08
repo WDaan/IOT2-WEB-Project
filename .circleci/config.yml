@@ -54,9 +54,13 @@ workflows:
               ignore:
                 - develop
                 - /feature-.*/
+                - server
+                - nucleo
       - js-test:
           filters:
             branches:
               ignore:
                 - develop
                 - /feature-.*/
+                - server
+                - nucleo

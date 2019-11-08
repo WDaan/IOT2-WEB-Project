@@ -1,4 +1,0 @@
-.env
-/vendor
-node_modules/
-mqtt_creds.js
