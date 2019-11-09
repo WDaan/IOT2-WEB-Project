@@ -14,6 +14,7 @@ module.exports = {
   },
   rules: {
     semi: ["warn", "never"],
-    "no-console": 0
+    "no-console": 0,
+    indent: ["warn", 4]
   }
 };
