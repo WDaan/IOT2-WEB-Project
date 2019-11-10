@@ -16,11 +16,35 @@ class mysql {
         console.log('mysql client Created!')
     }
 
-    executeQuery(query) {
-        connection.query(query, (err, res, fields) => {
-            if (err) throw err
-            console.log(res)
+    async executeGetQuery(query) {
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, res, fields) => {
+                if (err) reject(err)
+                resolve(res)
+            })
         })
+    }
+
+    async executeWriteQuery(query, data) {
+        if (data) {
+            return new Promise((resolve, reject) => {
+                connection.query(query, data, (err, res, fields) => {
+                    if (err) reject(err)
+                    resolve(res)
+                })
+            })
+        }
+        return new Promise((res, rej) => rej('no data!'))
+    }
+
+    async getData(num = 10) {
+        return this.executeGetQuery(`Select * from \`data\` order by id limit ${num}`)
+    }
+
+    async writeData(data) {
+        if (data) {
+            return this.executeWriteQuery('Insert into data SET ?', data)
+        }
     }
 }
 

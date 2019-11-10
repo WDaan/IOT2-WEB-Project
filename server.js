@@ -50,9 +50,17 @@ app.get('/startInterval', (req, res) => {
         //         })
         //     }
         // })
+
         // send over mqtt
+
+        // works
         MQTT.send('daan', 'bla')
-    // add to myqsl database
+
+
+        // add to myqsl database
+
+        // works
+        // const data = await MYSQL.writeData({ temp: 25, speed: 1200 })
     }, 10000)
     res.send('Success 😄')
 })
