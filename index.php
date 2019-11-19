@@ -13,7 +13,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <title>Project IOT</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
-    <script src="/js/main.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/MQTT.js"></script>
 </head>
 
@@ -94,10 +94,7 @@ require('vendor/autoload.php');
 $mysqli = DatabaseHandler::getInstance();
 $helper = Helper::getInstance();
 
-$data = $mysqli->getAll();
-$data = $mysqli->getLast(10);
+$data = $mysqli->getLast(10, false);
 
 $helper->executeJsFunction("drawTable", $data);
-
-
 ?>

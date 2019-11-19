@@ -1,7 +1,8 @@
 {
   "require": {
     "vlucas/phpdotenv": "^3.6",
-    "phpunit/phpunit": "^8.4"
+    "phpunit/phpunit": "^8.4",
+    "ircmaxell/random-lib": "^1.2"
   },
   "autoload": {
     "classmap": [

@@ -49,9 +49,10 @@ final class DatabaseHandler
         $query = "SELECT * FROM `data` LIMIT " . $num;
         return $this->executeQuery($query);
     }
-    public function getLast($num = 5)
+    public function getLast($num = 5, $oldest_first = true)
     {
-        $query = "SELECT * FROM (SELECT * FROM `data` ORDER BY id DESC LIMIT " . $num . " )Var1 ORDER BY id ASC";
+        if($oldest_first) $query = "SELECT * FROM (SELECT * FROM `data` ORDER BY id DESC LIMIT " . $num . " )Var1 ORDER BY id ASC";   
+        else $query = "SELECT * FROM `data` ORDER BY id DESC LIMIT " . $num;
         return $this->executeQuery($query);
     }
 

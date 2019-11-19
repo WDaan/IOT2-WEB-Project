@@ -6,7 +6,7 @@ function handleFunction(fun, params, id) {
     document.getElementById(id).remove();
   });
 }
-function drawTable(data) {
+function drawTable(data, prepend) {
   data.forEach(el => {
     //rij
     let trow = document.createElement("tr");
@@ -32,6 +32,20 @@ function drawTable(data) {
     trow.appendChild(temp);
     trow.appendChild(speed);
 
-    tbody.append(trow);
+    prepend ? tbody.prepend(trow) : tbody.append(trow);
   });
+
+  if (localStorage.getItem('history')) {
+    let ids = JSON.parse(localStorage.getItem('history'));
+    if (ids.length >= 30) {
+      let remove = ids.splice(data.length);
+      console.log(remove);
+      remove.forEach(el => document.getElementById(el).remove());
+      //enkel oveblijvende ids
+      localStorage.setItem('history', JSON.stringify(ids));
+    }
+  }
+  else
+    localStorage.setItem('history', JSON.stringify(data.map(el => el.id)));
+
 }

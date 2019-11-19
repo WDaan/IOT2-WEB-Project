@@ -1,12 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function () {
   //retrieve credentials
   $.ajax({
     type: "GET",
     url: "http://pi4:3000/creds",
-    success: function(data) {
+    success: function (data) {
       Init(data);
     },
-    error: function() {
+    error: function () {
       console.error("Couldn't retrieve data");
     }
   });
@@ -33,7 +33,7 @@ $(document).ready(function() {
     // Klikken op de knop, koppelen met een actie...
     document
       .getElementById("btnSendMessage")
-      .addEventListener("click", function() {
+      .addEventListener("click", function () {
         message = new Paho.MQTT.Message(
           document.getElementById("tbxMessage").value
         );
@@ -44,20 +44,47 @@ $(document).ready(function() {
 
   function onConnected() {
     console.log("MQTT client connected!");
+
+    client.subscribe("temp", {
+      onSuccess: onSubscribed,
+      onFailure: onFailure
+    });
     client.subscribe("daan", {
-      onSuccess: onSubscribed
+      onSuccess: onSubscribed,
+      onFailure: onFailure
     });
   }
 
-  function onMessageArrived(message) {
-    let currentTime = new Date();
+  function onFailure(err) {
+    console.log(err);
+  }
 
-    document.getElementById("divSubscription").innerHTML +=
-      message.payloadString + " (" + currentTime.toLocaleTimeString() + ")<br>";
-    console.log("onMessageArrived: " + message.payloadString);
+
+  function onMessageArrived(message) {
+    switch (message.destinationName) {
+      case "daan":
+        let currentTime = new Date();
+
+        document.getElementById("divSubscription").innerHTML +=
+          message.payloadString + " (" + currentTime.toLocaleTimeString() + ")<br>";
+        console.log("onMessageArrived: " + message.payloadString);
+        break;
+      case "temp":
+        console.log(message.payloadString);
+        $.getScript('/js/main.js')
+          .done(() => {
+            drawTable([{ id: 12, time: '2019-11-08 9:56:33', temp: '21', speed: '1000' }], true)
+          });
+        break;
+      default:
+        break;
+    }
   }
 
   function onSubscribed(invocationContext) {
     console.log("MQTT client subscribed!");
   }
+
+
 });
+
