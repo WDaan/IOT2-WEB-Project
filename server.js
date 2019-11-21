@@ -20,7 +20,7 @@ const config = {
   psm: 3,
 }
 
-const FPS = 10
+const FPS = 7
 const wCap = new cv.VideoCapture(0)
 
 
@@ -48,13 +48,17 @@ app.get('/result', (req, res) => {
   tesseract
     .recognize('test.png', config)
     .then((text) => {
+      text = text.trim()
       console.log('Resulst:', text)
       res.send(text.trim())
+      if(text != ' ' && text != '')
+       MYSQL.writeData({word: text})
     })
     .catch((error) => {
       console.log(error.message)
       res.send(error.message)
     })
+   
 })
 
 setInterval(() => {

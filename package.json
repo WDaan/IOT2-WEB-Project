@@ -13,6 +13,7 @@
     "mqtt": "^3.0.0",
     "mysql": "^2.17.1",
     "node-tesseract-ocr": "^1.0.0",
+    "opencv4nodejs": "^5.5.0",
     "serialport": "^8.0.5",
     "socket.io": "^2.3.0"
   },
