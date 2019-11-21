@@ -14,23 +14,19 @@ function drawTable(data, prepend) {
     trow.id = el.id;
     //data cols
     let tijd = document.createElement("th");
-    let temp = document.createElement("td");
-    let speed = document.createElement("td");
+    let word = document.createElement("td");
 
     //data toevoegen
     tijd.innerHTML = el.time;
-    temp.innerHTML = el.temp;
-    speed.innerHTML = el.speed;
+    word.innerHTML = el.word;
 
     //styling
-    tijd.setAttribute("align", "center");
-    temp.setAttribute("align", "center");
-    speed.setAttribute("align", "center");
+   // tijd.setAttribute("align", "center");
+   // word.setAttribute("align", "center");
 
     //adding to table
     trow.appendChild(tijd);
-    trow.appendChild(temp);
-    trow.appendChild(speed);
+    trow.appendChild(word);
 
     prepend ? tbody.prepend(trow) : tbody.append(trow);
   });

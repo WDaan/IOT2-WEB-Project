@@ -31,15 +31,15 @@ $(document).ready(function () {
     });
 
     // Klikken op de knop, koppelen met een actie...
-    document
-      .getElementById("btnSendMessage")
-      .addEventListener("click", function () {
-        message = new Paho.MQTT.Message(
-          document.getElementById("tbxMessage").value
-        );
-        message.destinationName = "daan"; // Moet gelijk zijn aan 'topic'.
-        client.send(message);
-      });
+    // document
+    //   .getElementById("btnSendMessage")
+    //   .addEventListener("click", function () {
+    //     message = new Paho.MQTT.Message(
+    //       document.getElementById("tbxMessage").value
+    //     );
+    //     message.destinationName = "daan"; // Moet gelijk zijn aan 'topic'.
+    //     client.send(message);
+    //   });
   }
 
   function onConnected() {

@@ -39,7 +39,7 @@
                 </div>
             </div>
         </nav>
-        <div>
+          <div>
             <section id="home-section" class="section header">
                 <div class="container">
                     <h1 class="title is-1">
@@ -48,6 +48,27 @@
                 </div>
             </section>
             <section>
+            <img id="image" />
+            <h1 class="title is-3">Result: <span id="result"></span></h1>
+                <button onclick="recognise()" class="button is-primary" style="margin-top:60px;">RECOGNISE</button>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+            <script>
+             const socket = io.connect("http://pi4:3000");
+             socket.on("image", image => {
+              const imageElm = document.getElementById("image");
+                imageElm.src = `data:image/jpeg;base64,${image}`;
+            });
+
+            function recognise() {
+             axios.get("http://pi4:3000/result", {}).then(res => {
+               document.getElementById('result').innerHTML = res.data;
+                  console.log(res);
+             });
+           }
+          </script>
+            </section>
+            <!--<section>
                 <div class="columns">
                     <div class="column is-two-thirds">
                         <input type="text" id="tbxMessage" class="form-control input" placeholder="message to send..." />
@@ -63,15 +84,14 @@
                     <h3>Subscription</h3>
                     <div id="divSubscription"></div>
                 </div>
-            </section>
+            </section>-->
             <!--datatable-->
             <section>
                 <table class="table is-fullwidth is-striped" style="margin-top:50px;">
                     <thead>
                         <tr>
                             <th>Tijd</th>
-                            <th>Temperatuur (°C)</th>
-                            <th>Fanspeed (rpm)</th>
+                            <th>Word</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
