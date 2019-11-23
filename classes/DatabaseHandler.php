@@ -62,7 +62,7 @@ final class DatabaseHandler
             /* fetch associative array */
             $data = [];
             while ($row = $result->fetch_assoc()) {
-                $data[] =  ['id' =>  $row['ID'], 'time' => $row["TIME"], 'word' => $row['WORD']];
+                $data[] =  ['id' =>  $row['ID'], 'time' => $row["TIME"], 'expected' => $row['EXPECTED'] , 'word' => $row['WORD']];
             }
             /* free result set */
             $result->free();

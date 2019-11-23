@@ -14,10 +14,12 @@ function drawTable(data, prepend) {
     trow.id = el.id;
     //data cols
     let tijd = document.createElement("th");
+    let expected = document.createElement("td");
     let word = document.createElement("td");
 
     //data toevoegen
     tijd.innerHTML = el.time;
+    expected.innerHTML = el.expected;
     word.innerHTML = el.word;
 
     //styling
@@ -26,6 +28,7 @@ function drawTable(data, prepend) {
 
     //adding to table
     trow.appendChild(tijd);
+    trow.appendChild(expected);
     trow.appendChild(word);
 
     prepend ? tbody.prepend(trow) : tbody.append(trow);

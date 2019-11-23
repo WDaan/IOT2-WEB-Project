@@ -13,6 +13,8 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <title>Project IOT</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/MQTT.js"></script>
 </head>
@@ -39,58 +41,51 @@
                 </div>
             </div>
         </nav>
-          <div>
+        <div>
             <section id="home-section" class="section header">
                 <div class="container">
                     <h1 class="title is-1">
-                        RPI Fan Controller
+                        RPI Webcam OCR
                     </h1>
                 </div>
             </section>
             <section>
-            <img id="image" />
-            <h1 class="title is-3">Result: <span id="result"></span></h1>
-                <button onclick="recognise()" class="button is-primary" style="margin-top:60px;">RECOGNISE</button>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-            <script>
-             const socket = io.connect("http://pi4:3000");
-             socket.on("image", image => {
-              const imageElm = document.getElementById("image");
-                imageElm.src = `data:image/jpeg;base64,${image}`;
-            });
-
-            function recognise() {
-             axios.get("http://pi4:3000/result", {}).then(res => {
-               document.getElementById('result').innerHTML = res.data;
-                  console.log(res);
-             });
-           }
-          </script>
-            </section>
-            <!--<section>
-                <div class="columns">
+                <img id="image" />
+                <h1 class="title is-3">Result: <span id="result"></span></h1>
+                <div class="columns" style="margin-top:60px;">
                     <div class="column is-two-thirds">
-                        <input type="text" id="tbxMessage" class="form-control input" placeholder="message to send..." />
+                        <input type="text" id="recInput" class="form-control input" placeholder="Expected result" />
                     </div>
                     <div class="column">
-                        <button id="btnSendMessage" class="button is-primary">
-                            Send message
+                        <button onclick="recognise(document.getElementById('recInput').value)" id="btnSendMessage" class="button is-primary">
+                            RECOGNISE
                         </button>
                     </div>
+                </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+                <script>
+                    const socket = io.connect("http://pi4:3000");
+                    socket.on("image", image => {
+                        const imageElm = document.getElementById("image");
+                        imageElm.src = `data:image/jpeg;base64,${image}`;
+                    });
+                </script>
             </section>
             <section>
-                <div class="mt-4 container">
-                    <h3>Subscription</h3>
-                    <div id="divSubscription"></div>
-                </div>
-            </section>-->
+                <h1 class="title is-3">
+                    OCR guesses stats
+                </h1>
+                <canvas id="myChart"></canvas>
+                <script src="js/chart.js"></script>
+            </section>
             <!--datatable-->
             <section>
                 <table class="table is-fullwidth is-striped" style="margin-top:50px;">
                     <thead>
                         <tr>
                             <th>Tijd</th>
+                            <th>Expected</th>
                             <th>Word</th>
                         </tr>
                     </thead>
@@ -98,8 +93,43 @@
                     </tbody>
                 </table>
             </section>
-        </div>
 
+            <section class="section header">
+                <div class="container">
+                    <h1 class="title is-1">
+                        RPI LEDstrip
+                    </h1>
+                </div>
+            </section>
+            <section>
+                <div style="margin: 0 auto;">
+                    <div id="color-picker"></div>
+                </div>
+                <script>
+                    var colorPicker = new iro.ColorPicker('#color-picker', {
+                        layout: [{
+                            component: iro.ui.Wheel,
+
+                        }]
+                    });
+                    $(document).ready(function() {
+                        $(".iro__colorPicker").css({
+                            "margin": "0 auto"
+                        })
+                    });
+                </script>
+                <button id="btnSendMessage" class="button is-primary" style="margin-top: 60px" onclick="setLeds(colorPicker.color.rgb)">
+                    set color
+                </button>
+                <script src="./js/leds.js"></script>
+            </section>
+            <section>
+                <div class="mt-4 container">
+                    <h3>Subscription</h3>
+                    <div id="divSubscription"></div>
+                </div>
+            </section>
+        </div>
     </div>
     <footer style="text-align: center">
         This page was made by Daan Wijns
