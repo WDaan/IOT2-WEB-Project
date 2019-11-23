@@ -1,0 +1,27 @@
+--cpu=Cortex-M4.fp
+"f411_ledstrip\startup_stm32f411xe.o"
+"f411_ledstrip\main.o"
+"f411_ledstrip\stm32f4xx_it.o"
+"f411_ledstrip\stm32f4xx_hal_msp.o"
+"f411_ledstrip\system_stm32f4xx.o"
+"f411_ledstrip\stm32f4xx_hal_spi.o"
+"f411_ledstrip\stm32f4xx_hal_rcc.o"
+"f411_ledstrip\stm32f4xx_hal_rcc_ex.o"
+"f411_ledstrip\stm32f4xx_hal_flash.o"
+"f411_ledstrip\stm32f4xx_hal_flash_ex.o"
+"f411_ledstrip\stm32f4xx_hal_flash_ramfunc.o"
+"f411_ledstrip\stm32f4xx_hal_gpio.o"
+"f411_ledstrip\stm32f4xx_hal_dma_ex.o"
+"f411_ledstrip\stm32f4xx_hal_dma.o"
+"f411_ledstrip\stm32f4xx_hal_pwr.o"
+"f411_ledstrip\stm32f4xx_hal_pwr_ex.o"
+"f411_ledstrip\stm32f4xx_hal_cortex.o"
+"f411_ledstrip\stm32f4xx_hal.o"
+"f411_ledstrip\stm32f4xx_hal_exti.o"
+"f411_ledstrip\stm32f4xx_hal_tim.o"
+"f411_ledstrip\stm32f4xx_hal_tim_ex.o"
+"f411_ledstrip\stm32f4xx_hal_uart.o"
+--library_type=microlib --strict --scatter "F411_LEDSTRIP\F411_LEDSTRIP.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "F411_LEDSTRIP.map" -o F411_LEDSTRIP\F411_LEDSTRIP.axf

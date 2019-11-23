@@ -1,74 +1,0 @@
-Dependencies for Project 'demo', Target 'Target 1': (DO NOT MODIFY !)
-F (.\premade bestanden\buttons.c)(0x5D8B1919)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F091xC-o .\objects\buttons_1.o --omf_browse .\objects\buttons_1.crf --depend .\objects\buttons_1.d)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f091xc.h)(0x5978C20E)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0.h)(0x5D25E516)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBCE42)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x5978C20E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEBCE3E)
-F (.\premade bestanden\leds.c)(0x5D8B1914)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F091xC-o .\objects\leds_1.o --omf_browse .\objects\leds_1.crf --depend .\objects\leds_1.d)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f091xc.h)(0x5978C20E)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0.h)(0x5D25E516)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBCE42)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x5978C20E)
-F (.\premade bestanden\main.c)(0x5DD11B10)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F091xC-o .\objects\main_1.o --omf_browse .\objects\main_1.crf --depend .\objects\main_1.d)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f091xc.h)(0x5978C20E)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0.h)(0x5D25E516)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBCE42)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x5978C20E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEBCE42)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEBCE3E)
-I (premade bestanden\leds.h)(0x5D8B190B)
-I (premade bestanden\buttons.h)(0x5D8B1917)
-I (premade bestanden\usart2.h)(0x5D9D86A0)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEBCE42)
-I (premade bestanden\spi1.h)(0x5DCBE747)
-F (.\premade bestanden\ad.c)(0x5D9DA927)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F091xC-o .\objects\ad.o --omf_browse .\objects\ad.crf --depend .\objects\ad.d)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f091xc.h)(0x5978C20E)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0.h)(0x5D25E516)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBCE42)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x5978C20E)
-F (.\premade bestanden\usart2.c)(0x5D9D86A0)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F091xC-o .\objects\usart2.o --omf_browse .\objects\usart2.crf --depend .\objects\usart2.d)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f091xc.h)(0x5978C20E)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0.h)(0x5D25E516)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBCE42)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x5978C20E)
-I (premade bestanden\usart2.h)(0x5D9D86A0)
-F (.\premade bestanden\spi1.c)(0x5DD11C7A)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F091xC-o .\objects\spi1.o --omf_browse .\objects\spi1.crf --depend .\objects\spi1.d)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f091xc.h)(0x5978C20E)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0.h)(0x5D25E516)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBCE42)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x5978C20E)
-I (premade bestanden\spi1.h)(0x5DCBE747)
-F (.\premade bestanden\buttons.h)(0x5D8B1917)()
-F (.\premade bestanden\leds.h)(0x5D8B190B)()
-F (.\premade bestanden\ad.h)(0x5D9DAD59)()
-F (.\premade bestanden\usart2.h)(0x5D9D86A0)()
-F (.\premade bestanden\spi1.h)(0x5DCBE747)()
-F (RTE\Device\STM32F091RCTx\startup_stm32f091xc.s)(0x5978C20E)(--cpu Cortex-M0 -g --apcs=interwork -I.\RTE\_Target_1-IC:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include--pd "__UVISION_VERSION SETA 528" --pd "_RTE_ SETA 1" --pd "STM32F091xC SETA 1"--list .\listings\startup_stm32f091xc.lst --xref -o .\objects\startup_stm32f091xc.o --depend .\objects\startup_stm32f091xc.d)
-F (RTE\Device\STM32F091RCTx\system_stm32f0xx.c)(0x5978C20E)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F091xC-o .\objects\system_stm32f0xx.o --omf_browse .\objects\system_stm32f0xx.crf --depend .\objects\system_stm32f0xx.d)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h)(0x5978C20E)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\stm32f091xc.h)(0x5978C20E)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0.h)(0x5D25E516)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBCE42)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
-I (C:\Users\daanw\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h)(0x5978C20E)
