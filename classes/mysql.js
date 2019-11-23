@@ -46,6 +46,26 @@ class mysql {
             return this.executeWriteQuery('Insert into data SET ?', data)
         }
     }
+
+    async addToCounter(name) {
+        const query = `UPDATE \`counter\` SET value=value+1 WHERE name='${name}'`
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, res, fields) => {
+                if (err) reject(err)
+                resolve(res)
+            })
+        })
+    }
+
+    async getCounters() {
+        const query = 'select name, value from `counter`'
+        return new Promise((resolve, reject) => {
+            connection.query(query, (err, res, fields) => {
+                if (err) reject(err)
+                resolve(JSON.stringify(res))
+            })
+        })
+    }
 }
 
 exports.default = new mysql()
