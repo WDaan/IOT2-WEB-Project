@@ -1,202 +1,80 @@
-// Basiscode voor het starten van eender welk project op Nucleo-F091RC. 
-// Versie: 20190205
-
 #include "stm32f091xc.h"
 #include "stdio.h"
 #include "stdbool.h"
 #include "leds.h"
 #include "buttons.h"
-#include "ad.h"
-#include "math.h"
+#include "usart2.h"
+#include <string.h>
+#include "spi1.h"
+
 
 void SystemClock_Config(void);
 void InitIo(void);
 void WaitForMs(uint32_t timespan);
 
-uint8_t count = 0;
-char text[101];
 volatile uint32_t ticks = 0;
 
-void AdcToLeds(uint16_t value){
-	value = floor(value/455); /*455 want 4096/9 = 455*/
-	//printf("value: %d\n", value);
-	switch(value){
-		case 1:
-			ByteToLeds(1);
-			break;
-		case 2:
-			ByteToLeds(3);
-			break;
-		case 3:
-			ByteToLeds(7);
-			break;
-		case 4:
-			ByteToLeds(15);
-			break;
-		case 5:
-			ByteToLeds(31);
-			break;
-		case 6:
-			ByteToLeds(63);
-			break;
-		case 7:
-			ByteToLeds(127);
-			break;
-		case 8:
-			ByteToLeds(255);
-			break;
-		default:
-			ByteToLeds(0);
-			break;
-	}
-}
-
-void setMAXLed(uint16_t value, uint16_t max){
-	uint16_t temp = value;
-	value = floor(value/455); /*455 want 4096/9 = 455*/
-	max = floor(max/455) -1;
-	switch(value){
-		case 1:
-			ByteToLeds(1 | (1 << max));
-			break;
-		case 2:
-			ByteToLeds(3 | (1 << max));
-			break;
-		case 3:
-			ByteToLeds(7 | (1 << max));
-			break;
-		case 4:
-			ByteToLeds(15 | (1 << max));
-			break;
-		case 5:
-			ByteToLeds(31 | (1 << max));
-			break;
-		case 6:
-			ByteToLeds(63 | (1 << max));
-			break;
-		case 7:
-			ByteToLeds(127 | (1 << max));
-			break;
-		case 8:
-			ByteToLeds(255 | (1 << max));
-			break;
-		default:
-			ByteToLeds(0);
-			break;
-	}
-	
-}
-
-void InitTimer7();
+//enum usartState {idle, busyReceiving, newStringArrived, receptionTimeOut, overflowOccured};
+//volatile enum usartState usart2State = idle;
 
 int main(void)
 {
 	SystemClock_Config();
 	InitIo();
 	InitLeds();
-	initAD();
-	InitTimer7();
+	InitUsart2(115200);
+	InitSpi1();
+	
+	uint8_t data[] =  //BLUE GREEN RED
+		{ 0x00, 0x00, 0x00, 0x00, //start frame
+			0x00, 0x00, 0x00, 0x00, //start frame
+			0x97, 0xFF, 0x00, 0x00, //led frame 1: blue
+			0x97, 0x00, 0xFF, 0x00, //led frame 2: green
+			0x97, 0x00, 0x00, 0xFF, //led frame 3: red
+			0x97, 0x00, 0xFF, 0xFF, //led frame 4: yellow
+			0x97, 0xFF, 0xFF, 0xFF, //led frame 5: white
+			0x00, 0x00, 0x00, 0x00, //end frame
+			0x00, 0x00, 0x00, 0x00, //end frame
+		};
 	
 	while (1)
-	{
-			if(SW1Active()){
-				
-			}
-	
-	
+	{	
+		char text[10] = "hallo\r\n";
+		StringToUsart2(text);
+		WaitForMs(1000);
+	  for(uint8_t i = 0; i < sizeof(data)/sizeof(uint8_t); i++){
+			ByteToSpi1(data[i]);
+			char str[12];
+			sprintf(str, "%d : Byte: %d\n", i, data[i]);
+			StringToUsart2(str);
 		}
-}
-
-void InitTimer7(){
-	RCC-> APB1ENR |= RCC_APB1ENR_TIM7EN;
-	
-	TIM7->PSC = 48000;
-	
-	TIM7->ARR = 500; //elke 500ms een interupt
-	
-	TIM7->DIER |= TIM_DIER_UIE;
-	TIM7->CR1 |= TIM_CR1_CEN;
-	
-	NVIC_SetPriority(TIM7_IRQn, 0);
-	NVIC_EnableIRQ(TIM7_IRQn);
-}
-
-void TIM7_IRQHandler(){
-	if((TIM7->SR & TIM_SR_UIF) == TIM_SR_UIF){
-		
-		TIM7->SR &= ~TIM_SR_UIF; //timer resetten
-		
-		//led1 togglen
-		GPIOC->ODR ^= GPIO_ODR_0;
-		
+		StringToUsart2("\r\n");
+		WaitForMs(1000);
 	}
 }
-
 
 void InitIo(void)
 {
-	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
-	
-	// PA1 koppelen aan EXTI 1.
-	SYSCFG->EXTICR[1] |= SYSCFG_EXTICR1_EXTI1_PA;
-	
-	// Falling edge detecteren op 'PA1'.
-	EXTI->FTSR |= EXTI_FTSR_TR1;
-	
-	// Interrupt toelaten.
-	EXTI->IMR |= EXTI_IMR_MR1;
-	
-	// Software prioriteit kiezen.
-	NVIC_SetPriority(EXTI0_1_IRQn, 0);
-	
-	// Koppeling maken met een interrupt handler.
-	NVIC_EnableIRQ(EXTI0_1_IRQn);
-	
-	
-	//SW2
-	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
-	
-	// PA4 koppelen aan EXTI 4.
-	SYSCFG->EXTICR[1] |= SYSCFG_EXTICR2_EXTI4_PA;
-	
-	// Falling edge detecteren op 'PA4'.
-	EXTI->FTSR |= EXTI_FTSR_TR4;
-	
-	// Interrupt toelaten.
-	EXTI->IMR |= EXTI_IMR_MR4;
-	
-	// Software prioriteit kiezen.
-	NVIC_SetPriority(EXTI4_15_IRQn, 0);
-	
-	// Koppeling maken met een interrupt handler.
-	NVIC_EnableIRQ(EXTI4_15_IRQn);
+
 }
 
-void EXTI0_1_IRQHandler(void)
+// Interrupt handler van USART2
+void USART2_IRQHandler(void)
 {
-	// Controleren of effectief op PA1 gedrukt werd.
-	if((EXTI->PR & EXTI_PR_PR1) == EXTI_PR_PR1)
+	// Byte ontvangen?
+	if((USART2->ISR & USART_ISR_RXNE) == USART_ISR_RXNE)
 	{
-		// LED's inschakelen.
-		ByteToLeds(255);
-		
-		// Interruptvlag resetten.
-		EXTI->PR |= EXTI_PR_PR1;
+		// Byte ontvangen, lees hem om alle vlaggen te wissen.
+		uint8_t temp = USART2->RDR;
+		char text[50];
+		sprintf(text, "%d", temp);
+		strcat(text, "\r\n");
+		StringToUsart2(text);
+		WaitForMs(1000);
 	}
 }
 
-void EXTI4_15_IRQHandler(void)
-{
-	// Controleren of effectief op PA4 gedrukt werd.
-	if((EXTI->PR & EXTI_PR_PR4) == EXTI_PR_PR4)
-	{
-		// LED's inschakelen.
-		ByteToLeds(0);
-		
-		// Interruptvlag resetten.
-		EXTI->PR |= EXTI_PR_PR4;
-	}
-}
+
 
 // Handler die iedere 1ms afloopt. Ingesteld met SystemCoreClockUpdate() en SysTick_Config().
 void SysTick_Handler(void)

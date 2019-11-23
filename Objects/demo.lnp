@@ -3,6 +3,8 @@
 ".\objects\leds_1.o"
 ".\objects\main_1.o"
 ".\objects\ad.o"
+".\objects\usart2.o"
+".\objects\spi1.o"
 ".\objects\startup_stm32f091xc.o"
 ".\objects\system_stm32f0xx.o"
 --strict --scatter ".\Objects\demo.sct"

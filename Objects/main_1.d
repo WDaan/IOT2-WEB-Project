@@ -10,5 +10,6 @@
 .\objects\main_1.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\main_1.o: premade bestanden\leds.h
 .\objects\main_1.o: premade bestanden\buttons.h
-.\objects\main_1.o: premade bestanden\ad.h
-.\objects\main_1.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\main_1.o: premade bestanden\usart2.h
+.\objects\main_1.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main_1.o: premade bestanden\spi1.h

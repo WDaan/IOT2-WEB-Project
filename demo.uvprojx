@@ -402,6 +402,16 @@
               <FileType>1</FileType>
               <FilePath>.\premade bestanden\ad.c</FilePath>
             </File>
+            <File>
+              <FileName>usart2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\premade bestanden\usart2.c</FilePath>
+            </File>
+            <File>
+              <FileName>spi1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\premade bestanden\spi1.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -421,6 +431,16 @@
               <FileName>ad.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\premade bestanden\ad.h</FilePath>
+            </File>
+            <File>
+              <FileName>usart2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\premade bestanden\usart2.h</FilePath>
+            </File>
+            <File>
+              <FileName>spi1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\premade bestanden\spi1.h</FilePath>
             </File>
           </Files>
         </Group>
