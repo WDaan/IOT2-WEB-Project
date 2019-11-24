@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" integrity="sha256-ujE/ZUB6CMZmyJSgQjXGCF4sRRneOimQplBVLu8OU5w=" crossorigin="anonymous" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700|Nanum+Gothic:400,700,800&display=swap" rel="stylesheet" />
-
     <link rel="stylesheet" href="css/main.css" />
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <title>Project IOT</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script src="js/util.js"></script>
     <script src="js/main.js"></script>
     <script src="js/MQTT.js"></script>
 </head>
@@ -62,8 +64,6 @@
                         </button>
                     </div>
                 </div>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
                 <script>
                     const socket = io.connect("http://pi4:3000");
                     socket.on("image", image => {
@@ -77,7 +77,6 @@
                     OCR guesses stats
                 </h1>
                 <canvas id="myChart"></canvas>
-                <script src="js/chart.js"></script>
             </section>
             <!--datatable-->
             <section>
@@ -118,10 +117,10 @@
                         })
                     });
                 </script>
-                <button id="btnSendMessage" class="button is-primary" style="margin-top: 60px" onclick="setLeds(colorPicker.color.rgb)">
+                <h1 class="title is-5" style="margin-top:40px">Selected Color: <span id="color"></span></h1>
+                <button id="btnSendMessage" class="button is-primary" style="margin-top: 30px" onclick="setLeds(colorPicker.color.rgb)">
                     set color
                 </button>
-                <script src="./js/leds.js"></script>
             </section>
             <section>
                 <div class="mt-4 container">
