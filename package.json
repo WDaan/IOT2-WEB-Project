@@ -13,9 +13,6 @@
     "express": "^4.17.1",
     "mqtt": "^3.0.0",
     "mysql": "^2.17.1",
-    "node-tesseract-ocr": "^1.0.0",
-    "opencv4nodejs": "^5.5.0",
-    "serialport": "^8.0.5",
     "socket.io": "^2.3.0"
   },
   "keywords": [],
@@ -25,6 +22,9 @@
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "node-tesseract-ocr": "^1.0.0",
+    "opencv4nodejs": "^5.5.0",
+    "serialport": "^8.0.5",
   }
 }
