@@ -1,58 +1,36 @@
-const cv = require('opencv4nodejs')
-const path = require('path')
 const express = require('express')
 const cors = require('cors')
-const SerialPort = require('serialport')
-
-// serialport config
-const port = new SerialPort('/dev/ttyACM0', {
-    baudRate: 115200,
-    autoOpen: false,
-})
-
 
 const PORT = process.env.PORT || 3000
-
 
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
-const tesseract = require('node-tesseract-ocr')
 const creds = require('./config.js')
 
-// video capture config
-const config = {
-    lang: 'nld',
-    oem: 1,
-    psm: 3,
-}
-let wCap
+app.use(express.json())
+app.use(cors())
+
+
+// Webcam
+const CAM = require('./classes/webcam').default
 
 const FPS = 7
 
-try {
-    wCap = new cv.VideoCapture(0)
-    setInterval(() => {
-        const frame = wCap.read()
-        const image = cv.imencode('.png', frame).toString('base64')
-        io.emit('image', image)
-    }, 1000 / FPS)
-} catch (err) {
-    console.log('error connecting webcam')
-}
-
+setInterval(() => {
+    const image = CAM.getBase64Image()
+    if (image) io.emit('image', image)
+}, 1000 / FPS)
 
 // MQTT
-const MQTT = require('./classes/mqtt').default
-
+// const MQTT = require('./classes/mqtt').default
 
 // MYSQL
 const MYSQL = require('./classes/mysql').default
 
-
-app.use(express.json())
-app.use(cors())
+// Serial
+const SERIAL = require('./classes/serial').default
 
 // credentials for mqtt
 app.get('/creds', (req, res) => {
@@ -60,69 +38,51 @@ app.get('/creds', (req, res) => {
     res.send(creds)
 })
 
-app.get('/result', (req, res) => {
+// ocr
+app.get('/result', async (req, res) => {
     const { expected } = req.query
-    if (wCap != undefined && wCap != null) {
-        const frame = wCap.read()
-        const image = cv.imencode('.png', frame).toString('base64')
-        cv.imwrite('test.png', frame)
-        tesseract
-            .recognize('test.png', config)
-            .then((text) => {
-                text = text.trim()
-                const reg = /^[a-z0-9]+$/i
-                let match = text.match(reg)
-                if (match != ' ' && match != '' && match != null) {
-                    match = match[0].toString().toLowerCase()
-                    console.log('Result:', match)
-                    res.send(match)
-                    MYSQL.writeData({ word: match, expected })
-                    if (text == expected) {
-                        MYSQL.addToCounter('CORRECT')
-                    } else {
-                        MYSQL.addToCounter('INCORRECT')
-                    }
-                } else {
-                    res.statusMessage = 'No match found'
-                    res.status(409).end()
-                }
-            })
-            .catch((error) => {
-                console.log(error.message)
-                res.send(error.message)
-            })
-    } else {
-        res.statusMessage = 'Webcam not connected'
-        res.status(409).end()
-    }
-})
+    const image = CAM.getImage()
+    if (image) {
+        try {
+            const result = await CAM.recognizeImage(image)
 
-
-app.get('/color', (req, res) => {
-    const {
-        color,
-    } = req.query
-    if (color.length != 9) {
-        res.statusMessage = 'Number must be 9 characters'
-        res.status(409).end()
-    } else {
-        port.open((error) => {
-            if (error) console.log('Error opening..')
-            else {
-                port.write(color)
-                port.close()
+            if (result) {
+                console.log('Result:', result)
+                res.send(result)
+                // save expected + recognized word in database
+                MYSQL.writeData({ word: result, expected })
+                // increase counter
+                result === expected ? MYSQL.addToCounter('CORRECT') : MYSQL.addToCounter('INCORRECT')
             }
-        })
-        res.send(color)
+        } catch (err) {
+            console.log(err)
+        }
+    } else {
+        res.statusMessage = 'No match found'
+        res.status(409).end()
     }
-
-    console.log("Color: " + color)
 })
 
+// ocr correct stats
 app.get('/counter', async (req, res) => {
     const temp = await MYSQL.getCounters()
     res.send(temp)
 })
+
+
+// set ledstrip colors
+app.get('/color', (req, res) => {
+    const { color } = req.query
+    if (color.length !== 9) {
+        res.statusMessage = 'Number must be 9 characters'
+        res.status(409).end()
+    } else {
+        SERIAL.writeLine(color)
+        res.send(color)
+    }
+    console.log(`Color: ${color}`)
+})
+
 
 app.get('/test', async (req, res) => {
     const temp = await MYSQL.getCounters()
@@ -130,4 +90,5 @@ app.get('/test', async (req, res) => {
     res.send('test')
 })
 
-server.listen(PORT, () => console.log(`server started on ${PORT}`))
+
+server.listen(PORT, () => console.log(`server started on port ${PORT}...`))

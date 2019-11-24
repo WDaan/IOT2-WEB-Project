@@ -61,4 +61,3 @@ workflows:
               ignore:
                 - develop
                 - /feature-.*/
-                - server

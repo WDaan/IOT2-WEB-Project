@@ -11,9 +11,9 @@ const connection = sql.createConnection({
 connection.connect()
 
 
-class mysql {
+class Mysql {
     constructor() {
-        console.log('mysql client Created!')
+        console.log('Mysql client created!')
     }
 
     async executeGetQuery(query) {
@@ -68,4 +68,4 @@ class mysql {
     }
 }
 
-exports.default = new mysql()
+exports.default = new Mysql()
