@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -123,10 +127,19 @@
                 </button>
             </section>
             <section>
-                <div class="mt-4 container">
-                    <h3>Subscription</h3>
-                    <div id="divSubscription"></div>
-                </div>
+            <h1 class="subtitle is-1">
+                    Visitor count : 
+                    <?php
+                    if (!isset($_SESSION['count'])) {
+                        $_SESSION['count'] = 10;
+                    }
+                    else {
+                        $_SESSION['count'] = $_SESSION['count'] + 1; 
+                    }
+                    
+                    echo $_SESSION['count'];
+                    ?>
+            </h1>
             </section>
         </div>
     </div>
