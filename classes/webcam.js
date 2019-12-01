@@ -38,7 +38,6 @@ class Webcam {
         return null
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async recognizeImage(img) {
         return new Promise(async (res, rej) => {
         // run ocr on picture

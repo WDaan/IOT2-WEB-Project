@@ -45,6 +45,7 @@ class Mysql {
         if (data) {
             return this.executeWriteQuery('Insert into data SET ?', data)
         }
+        return null
     }
 
     async addToCounter(name) {

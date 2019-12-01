@@ -52,7 +52,10 @@ app.get('/result', async (req, res) => {
                 // save expected + recognized word in database
                 MYSQL.writeData({ word: result, expected })
                 // increase counter
-                result === expected ? MYSQL.addToCounter('CORRECT') : MYSQL.addToCounter('INCORRECT')
+                if (result === expected)
+                    MYSQL.addToCounter('CORRECT')
+                else
+                    MYSQL.addToCounter('INCORRECT')
             }
         } catch (err) {
             console.log(err)
